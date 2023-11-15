@@ -8,7 +8,6 @@ interface Animal {
   hasBeenFed: boolean;
 }
 
-
 const animals: Animal[] = [
   { id: 1, name: "Bessie", kind: "cow", age: 4, hasBeenFed: false },
   { id: 2, name: "Dolly", kind: "sheep", age: 2, hasBeenFed: true },
@@ -27,7 +26,6 @@ const animals: Animal[] = [
   { id: 15, name: "Feathers", kind: "chicken", age: 2, hasBeenFed: true },
   { id: 16, name: "Piglet", kind: "pig", age: 4, hasBeenFed: true },
 ];
-
 
 interface AnimalListItemProps {
   animal: Animal;
@@ -88,7 +86,20 @@ const AnimalListItem = ({ animal }: AnimalListItemProps) => {
 interface AnimalsListProps {
   kind: AnimalKind;
 }
-const AnimalsList = ({ kind }: AnimalsListProps) => {
+
+import { useState } from "react";
+
+const AnimalsList = (props: AnimalsListProps) => {
+  const [getAnimals, setAnimals] = useState(animals);
+
+  const feedAnimal = animals.map((animal) => {
+    if (animal.hasBeenFed === false) {
+      return <>
+      <button key={animal.id}>Feed</button>
+      </>;
+    }
+  });
+
   return (
     <>
       <ul>
