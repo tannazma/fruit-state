@@ -9,7 +9,7 @@ const FruitList = () => {
   const [getFruitList, setFruitList] = useState<Fruit[]>(fruits);
 
   const toggleAvailability = (id: number) => {
-    console.log(id);
+    // console.log(id);
     setFruitList(
       getFruitList.map((fruit: Fruit) =>
         fruit.id === id ? { ...fruit, isAvailable: !fruit.isAvailable } : fruit
@@ -17,19 +17,19 @@ const FruitList = () => {
     );
   };
 
-  console.log(getFruitList);
+//   console.log(getFruitList);
 
   return (
     <>
       <ul>
         {getFruitList.map((fruit) => (
-          <div>
-            <li key={fruit.id}>{fruit.name}</li>
+          <li key={fruit.id}>
+            {fruit.name}
             <p>{fruit.isAvailable ? "✅" : "❌"}</p>
             <button onClick={() => toggleAvailability(fruit.id)}>
               Clear Fruit List
             </button>
-          </div>
+          </li>
         ))}
       </ul>
     </>
