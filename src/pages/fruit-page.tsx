@@ -3,11 +3,13 @@
 import React from "react";
 import { Fruit, fruits } from "../data/fruits";
 import { useState } from "react";
+import { NextMiddleware } from "next/server";
 
 // Create a component that displays a list of fruits with a button next to each fruit. When the button is clicked, the availability of the fruit should be toggled.
 const FruitList = () => {
   const [getFruitList, setFruitList] = useState<Fruit[]>(fruits);
   const [getSearchText, setSearchText] = useState("");
+  const [getCheckBox, setCheckBox] = useState(false);
   //   console.log(getSearchText);
 
   const toggleAvailability = (id: number) => {
@@ -23,15 +25,21 @@ const FruitList = () => {
     // console.log(event.target.value);
     setSearchText((event.target as HTMLInputElement).value);
   };
-
-  console.log(getFruitList);
+  const toggleCheckBox = () => {
+    setCheckBox(!getCheckBox);
+  };
+  // console.log(getCheckBox)
+  //   console.log(getFruitList);
 
   return (
     <>
       <input value={getSearchText} onInput={inputSearch} />
+      <br />
+      <input type="checkbox" onChange={toggleCheckBox} /> only available
       <ul>
         {getFruitList
           .filter((fruit) => fruit.name.includes(getSearchText))
+          .filter((fruit) => (getCheckBox ? fruit.isAvailable === true : true))
           .map((fruit) => (
             <li key={fruit.id}>
               {fruit.name}
