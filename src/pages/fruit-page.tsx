@@ -3,7 +3,6 @@
 import React from "react";
 import { Fruit, fruits } from "../data/fruits";
 import { useState } from "react";
-import { NextMiddleware } from "next/server";
 
 // Create a component that displays a list of fruits with a button next to each fruit. When the button is clicked, the availability of the fruit should be toggled.
 const FruitList = () => {
