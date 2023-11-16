@@ -33,19 +33,21 @@ const FruitList = () => {
 
   return (
     <>
-      <input value={getSearchText} onInput={inputSearch} />
+      <input placeholder="search" value={getSearchText} onInput={inputSearch} autoFocus/>
       <br />
       <input type="checkbox" onChange={toggleCheckBox} /> only available
       <ul>
         {getFruitList
-          .filter((fruit) => fruit.name.includes(getSearchText))
+          .filter((fruit) =>
+            fruit.name.toLowerCase().includes(getSearchText.toLowerCase())
+          )
           .filter((fruit) => (getCheckBox ? fruit.isAvailable === true : true))
           .map((fruit) => (
-            <li key={fruit.id}>
+            <li key={fruit.id} style={{margin:20}}>
               {fruit.name}
               <p>{fruit.isAvailable ? "✅" : "❌"}</p>
               <button onClick={() => toggleAvailability(fruit.id)}>
-                Clear Fruit List
+                Toggle Availibility
               </button>
             </li>
           ))}
